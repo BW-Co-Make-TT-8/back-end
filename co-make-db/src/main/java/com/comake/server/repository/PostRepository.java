@@ -1,5 +1,8 @@
 package com.comake.server.repository;
 
-public interface PostRepository
+import com.comake.server.models.Post;
+import org.springframework.data.repository.CrudRepository;
+
+public interface PostRepository extends CrudRepository<Post, Long>
 {
 }

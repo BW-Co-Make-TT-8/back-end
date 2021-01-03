@@ -1,5 +1,9 @@
 package com.comake.server.repository;
 
-public interface RoleRepository
+import com.comake.server.models.Role;
+import org.springframework.data.repository.CrudRepository;
+
+public interface RoleRepository extends CrudRepository<Role, Long>
 {
+
 }
