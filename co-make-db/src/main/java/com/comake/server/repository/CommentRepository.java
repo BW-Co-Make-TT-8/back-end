@@ -1,5 +1,8 @@
 package com.comake.server.repository;
 
-public interface CommentRepository
+import com.comake.server.models.Comment;
+import org.springframework.data.repository.CrudRepository;
+
+public interface CommentRepository extends CrudRepository<Comment, Long>
 {
 }
