@@ -11,7 +11,7 @@ import java.util.List;
 public class Location extends Auditable
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long locationid;
 
     @Column(nullable = false, unique = true)
