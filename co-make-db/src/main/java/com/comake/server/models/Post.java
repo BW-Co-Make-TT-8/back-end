@@ -11,7 +11,7 @@ import java.util.List;
 public class Post extends Auditable
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long postid;
 
     private String imgurl;
@@ -38,6 +38,11 @@ public class Post extends Auditable
     @JsonIgnoreProperties(value = "posts", allowSetters = true)
     private Location location;
 
+    @ManyToOne
+    @JoinColumn(name = "userid", nullable = false)
+    @JsonIgnoreProperties(value = "posts", allowSetters = true)
+    private User user = new User();
+
     @OneToMany(mappedBy = "post", orphanRemoval = true, cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = "post", allowSetters = true)
     private List<Comment> comments = new ArrayList<>();
@@ -46,7 +51,7 @@ public class Post extends Auditable
     {
     }
 
-    public Post(String imgurl, String title, String postbody, String streetaddress, String addressnotes, String city, String state, Location location)
+    public Post(String imgurl, String title, String postbody, String streetaddress, String addressnotes, String city, String state, Location location, User user)
     {
         this.imgurl = imgurl;
         this.title = title;
@@ -56,27 +61,7 @@ public class Post extends Auditable
         this.city = city;
         this.state = state;
         this.location = location;
-    }
-
-    public Post(String title, String postbody, String streetaddress, String addressnotes, String city, String state, Location location)
-    {
-        this.title = title;
-        this.postbody = postbody;
-        this.streetaddress = streetaddress;
-        this.addressnotes = addressnotes;
-        this.city = city;
-        this.state = state;
-        this.location = location;
-    }
-
-    public Post(String title, String postbody, String streetaddress, String city, String state, Location location)
-    {
-        this.title = title;
-        this.postbody = postbody;
-        this.streetaddress = streetaddress;
-        this.city = city;
-        this.state = state;
-        this.location = location;
+        this.user = user;
     }
 
     public long getPostid()
@@ -167,6 +152,16 @@ public class Post extends Auditable
     public void setLocation(Location location)
     {
         this.location = location;
+    }
+
+    public User getUser()
+    {
+        return user;
+    }
+
+    public void setUser(User user)
+    {
+        this.user = user;
     }
 
     public List<Comment> getComments()

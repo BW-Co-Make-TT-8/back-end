@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Comment extends Auditable
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long commentid;
 
     @Column(nullable = false)

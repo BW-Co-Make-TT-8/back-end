@@ -52,7 +52,7 @@ public class User extends Auditable
     @JsonIgnoreProperties(value = "user", allowSetters = true)
     private Set<UserRoles> roles = new HashSet<>();
 
-    @Id
+//    @Id
     @ManyToOne
     @JoinColumn(name = "locationid")
     @JsonIgnoreProperties(value = "user",
