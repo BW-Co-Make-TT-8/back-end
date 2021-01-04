@@ -35,12 +35,6 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
-    public User findUsersById(long id)
-    {
-        return null;
-    }
-
-    @Override
     public List<User> findAll()
     {
         List<User> list = new ArrayList<>();

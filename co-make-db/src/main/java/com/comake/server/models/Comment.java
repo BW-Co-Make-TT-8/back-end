@@ -22,7 +22,7 @@ public class Comment extends Auditable
 
     @ManyToOne
     @JoinColumn(name = "postid", nullable = false)
-    @JsonIgnoreProperties(value = "comments", allowSetters = true)
+    @JsonIgnoreProperties(value = {"comments", "post"}, allowSetters = true)
     private Post post;
 
     public Comment()
