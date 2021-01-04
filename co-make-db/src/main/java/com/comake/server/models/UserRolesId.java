@@ -3,7 +3,7 @@ package com.comake.server.models;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
-@Embeddable
+//@Embeddable
 public class UserRolesId implements Serializable
 {
     private long user;

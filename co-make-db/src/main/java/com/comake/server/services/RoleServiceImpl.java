@@ -1,5 +1,4 @@
 package com.comake.server.services;
-
 import com.comake.server.exceptions.ResourceNotFoundException;
 import com.comake.server.models.Role;
 import com.comake.server.repository.RoleRepository;
@@ -99,5 +98,4 @@ public class RoleServiceImpl implements RoleService
                 role.getName());
         return findRoleById(id);
     }
-
 }
