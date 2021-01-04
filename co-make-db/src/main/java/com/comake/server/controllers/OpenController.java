@@ -1,5 +1,6 @@
 package com.comake.server.controllers;
 
+import com.comake.server.models.LoginCredentials;
 import com.comake.server.models.User;
 import com.comake.server.models.UserMinimum;
 import com.comake.server.models.UserRoles;
@@ -30,20 +31,29 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * The class allows access to endpoints that are open to all users regardless of authentication status.
- * Its most important function is to allow a person to create their own username
- */
 @RestController
 public class OpenController
 {
-
+    /**
+     * A method in this controller adds a new user to the application so needs access to User Services to do this.
+     */
     @Autowired
     private UserService userService;
 
+    /**
+     * A method in this controller adds a new user to the application with the role User so needs access to Role Services to do this.
+     */
     @Autowired
     private RoleService roleService;
 
+    /**
+     * This endpoint always anyone to create an account with the default role of USER. That role is hardcoded in this method.
+     *
+     * @param httpServletRequest the request that comes in for creating the new user
+     * @param newminuser         A special minimum set of data that is needed to create a new user
+     * @return The token access and other relevent data to token access. Status of CREATED. The location header to look up the new user.
+     * @throws URISyntaxException we create some URIs during this method. If anything goes wrong with that creation, an exception is thrown.
+     */
     @PostMapping(value = "/createnewuser",
             consumes = {"application/json"},
             produces = {"application/json"})
@@ -80,7 +90,7 @@ public class OpenController
 
         // return the access token
         RestTemplate restTemplate = new RestTemplate();
-        String requestURI = "http://localhost" + ":" + httpServletRequest.getLocalPort() + "/login";
+        String requestURI = "http://localhost" + ":" + httpServletRequest.getLocalPort() + "/oauth/token";
 
         List<MediaType> acceptableMediaTypes = new ArrayList<>();
         acceptableMediaTypes.add(MediaType.APPLICATION_JSON);
@@ -113,6 +123,46 @@ public class OpenController
                 HttpStatus.CREATED);
     }
 
+    @PostMapping(value = "/login", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<?> loginUser(@Valid @RequestBody LoginCredentials loginCredentials, HttpServletRequest httpServletRequest)
+    {
+        RestTemplate restTemplate = new RestTemplate();
+        String requestURI = "http://localhost" + ":" + httpServletRequest.getLocalPort() + "/oauth/token";
+
+        List<MediaType> acceptableMediaTypes = new ArrayList<>();
+        acceptableMediaTypes.add(MediaType.APPLICATION_JSON);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        headers.setAccept(acceptableMediaTypes);
+        headers.setBasicAuth(System.getenv("OAUTHCLIENTID"),
+                System.getenv("OAUTHCLIENTSECRET"));
+
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+        map.add("grant_type",
+                "password");
+        map.add("scope",
+                "read write trust");
+        map.add("username",
+                loginCredentials.getUsername());
+        map.add("password",
+                loginCredentials.getPassword());
+
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map,
+                headers);
+
+        String theToken = restTemplate.postForObject(requestURI,
+                request,
+                String.class);
+
+        return new ResponseEntity<>(theToken,
+                null,
+                HttpStatus.CREATED);
+    }
+
+    /**
+     * Prevents no favicon.ico warning from appearing in the logs. @ApiIgnore tells Swagger to ignore documenting this as an endpoint.
+     */
     @ApiIgnore
     @GetMapping("favicon.ico")
     public void returnNoFavicon()
