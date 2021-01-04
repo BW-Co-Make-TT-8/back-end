@@ -41,7 +41,7 @@ public class Post extends Auditable
     @ManyToOne
     @JoinColumn(name = "userid", nullable = false)
     @JsonIgnoreProperties(value = {"posts", "comments"}, allowSetters = true)
-    private User user = new User();
+    private User user;
 
     @OneToMany(mappedBy = "post", orphanRemoval = true, cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = {"post", "user"}, allowSetters = true)

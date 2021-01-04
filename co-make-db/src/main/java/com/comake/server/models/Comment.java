@@ -29,6 +29,11 @@ public class Comment extends Auditable
     {
     }
 
+    public Comment(String commentbody)
+    {
+        this.commentbody = commentbody;
+    }
+
     public Comment(String commentbody, User user, Post post)
     {
         this.commentbody = commentbody;
@@ -61,7 +66,7 @@ public class Comment extends Auditable
         return user;
     }
 
-    public void setUserid(User user)
+    public void setUser(User user)
     {
         this.user = user;
     }
