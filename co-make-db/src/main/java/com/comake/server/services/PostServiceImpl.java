@@ -83,8 +83,6 @@ public class PostServiceImpl implements PostService
     @Override
     public Post findPostById(long id)
     {
-//
-
         return postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post with id " + id + " not found."));
     }
 
