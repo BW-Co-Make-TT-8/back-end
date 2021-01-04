@@ -10,7 +10,7 @@ public interface UserService
 
     List<User> findByNameContaining(String username);
 
-    User findUsersById(long id);
+    User findUserById(long id);
 
     User findByName(String name);
 

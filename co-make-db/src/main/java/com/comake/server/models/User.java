@@ -37,7 +37,7 @@ public class User extends Auditable
     @OneToMany(mappedBy = "user",
         cascade = CascadeType.ALL,
         orphanRemoval = true)
-    @JsonIgnoreProperties(value = "user", allowSetters = true)
+    @JsonIgnoreProperties(value = {"user", "post"}, allowSetters = true)
     private List<Comment> comments = new ArrayList<>();
 
     @OneToMany(mappedBy = "user",
