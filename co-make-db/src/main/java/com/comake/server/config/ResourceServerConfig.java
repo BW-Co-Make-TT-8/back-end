@@ -35,20 +35,22 @@ public class ResourceServerConfig
                         "/swagger-ui.html",
                         "/v2/api-docs",
                         "/webjars/**",
+                        "/login",
                         "/createnewuser")
                 .permitAll()
-                .antMatchers(HttpMethod.GET, "/books/books").hasAnyRole("ADMIN", "DATA")
-                .antMatchers(HttpMethod.GET, "/books/book/{id}").hasAnyRole("ADMIN", "DATA")
-                .antMatchers(HttpMethod.POST, "/books/book").hasAnyRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/books/book/{id}").hasAnyRole("ADMIN")
-                .antMatchers(HttpMethod.PUT, "/books/book/{id}").hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/posts").hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/posts/{zipcode}").hasAnyRole("ADMIN", "USER")
+                .antMatchers(HttpMethod.GET, "/posts/post/{id}").hasAnyRole("ADMIN", "USER")
+                .antMatchers(HttpMethod.DELETE, "/posts/post/{id}").hasAnyRole("ADMIN", "USER")
+                .antMatchers(HttpMethod.PUT, "/posts/post/{id}").hasAnyRole("ADMIN", "USER")
+                .antMatchers(HttpMethod.POST, "/posts").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/users/**",
                         "/useremails/**",
                         "/oauth/revoke-token",
                         "/logout")
                 .authenticated()
                 .antMatchers("/roles/**")
-                .hasAnyRole("ADMIN", "DATA")
+                .hasAnyRole("ADMIN", "USER")
                 .and()
                 .exceptionHandling()
                 .accessDeniedHandler(new OAuth2AccessDeniedHandler());

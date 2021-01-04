@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService
 
         newUser.setUsername(user.getUsername()
                 .toLowerCase());
-        newUser.setPassword(user.getPassword());
+        newUser.setPasswordNoEncrypt(user.getPassword());
         newUser.setEmail(user.getEmail()
                 .toLowerCase());
 

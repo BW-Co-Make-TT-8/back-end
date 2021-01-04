@@ -31,23 +31,23 @@ public class SeedData implements CommandLineRunner
     @Override
     public void run(String[] args) throws Exception
     {
-        User user1 = new User("sethb", "password", "seth.bradshaw@gmail.com");
-        User user2 = new User("davidc", "password", "david.chang@gmail.com");
-        User user3 = new User("chrisg", "password", "chris.girvin@gmail.com");
-
-        user1 = userService.save(user1);
-        user2 = userService.save(user2);
-        user3 = userService.save(user3);
-
-        Role role1 = new Role("admin");
-        Role role2 = new Role("user");
+        Role role1 = new Role("ADMIN");
+        Role role2 = new Role("USER");
 
         role1 = roleService.save(role1);
         role2 = roleService.save(role2);
 
+        User user1 = new User("sethb", "password", "seth.bradshaw@gmail.com");
+        User user2 = new User("davidc", "password", "david.chang@gmail.com");
+        User user3 = new User("chrisg", "password", "chris.girvin@gmail.com");
+
         user1.getRoles().add(new UserRoles(user1, role1));
         user2.getRoles().add(new UserRoles(user2, role1));
         user3.getRoles().add(new UserRoles(user3, role2));
+
+        user1 = userService.save(user1);
+        user2 = userService.save(user2);
+        user3 = userService.save(user3);
 
         Location l1 = new Location(84015);
         Location l2 = new Location(12345);

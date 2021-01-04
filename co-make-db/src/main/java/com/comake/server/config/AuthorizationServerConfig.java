@@ -36,20 +36,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    /**
-     * The authorization server must encrypt the client secret so needs to know what password encoder is in use.
-     */
     @Autowired
     private PasswordEncoder encoder;
 
-    /**
-     * Method to configure the Client Details Service for our application. This is created and managed by Spring.
-     * We just need to give it our custom configuration.
-     *
-     * @param configurer The ClientDetailsServiceConfigurer used in our application. Spring Boot Security created this for us.
-     *                   We just use it.
-     * @throws Exception if the configuration fails
-     */
     @Override
     public void configure(ClientDetailsServiceConfigurer configurer)
     throws
@@ -66,14 +55,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_SECONDS);
     }
 
-    /**
-     * Connects are endpoints to our custom authentication server and token store.
-     * We can also rename the endpoints for certain oauth functions
-     *
-     * @param endpoints The Authorization Server Endpoints Configurer is created and managed by Spring Boot Security.
-     *                  We give the configurer some custom configuration and let it work!
-     * @throws Exception if the configuration fails
-     */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints)
     throws
@@ -81,8 +62,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     {
         endpoints.tokenStore(tokenStore)
                 .authenticationManager(authenticationManager);
-        // here instead of our clients requesting authentication at the endpoint /oauth/token, they request it at the endpoint /login
-        endpoints.pathMapping("/oauth/token",
-                "/login");
+//        endpoints.pathMapping("/oauth/token",
+//                "/login");
     }
 }
