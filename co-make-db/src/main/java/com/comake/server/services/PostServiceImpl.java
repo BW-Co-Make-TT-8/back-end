@@ -2,9 +2,12 @@ package com.comake.server.services;
 
 import com.comake.server.exceptions.ResourceNotFoundException;
 import com.comake.server.models.Comment;
+import com.comake.server.models.Location;
 import com.comake.server.models.Post;
 import com.comake.server.repository.CommentRepository;
+import com.comake.server.repository.LocationRepository;
 import com.comake.server.repository.PostRepository;
+import com.mifmif.common.regex.util.Iterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,9 @@ public class PostServiceImpl implements PostService
 
     @Autowired
     CommentRepository commentRepository;
+
+    @Autowired
+    LocationRepository locationRepository;
 
     @Override
     public Post save(Post post)
@@ -41,6 +47,24 @@ public class PostServiceImpl implements PostService
         newPost.setCity(post.getCity());
         newPost.setState(post.getState());
         newPost.setLocation(post.getLocation());
+//        for (Location l : locationRepository.findAll())
+//        {
+//            Location location = new Location();
+//            if (post.getLocation().getZipcode() == l.getZipcode())
+//            {
+//                newPost.setLocation(post.getLocation());
+//            }
+////            else if (post.getLocation().getZipcode() != l.getZipcode())
+////            {
+////
+////            }
+//              else
+//            {
+//                location.setZipcode(l.getZipcode());
+//                locationRepository.save(location);
+//            }
+//        }
+
         newPost.setUser(post.getUser());
 
         for (Comment c : post.getComments())
@@ -71,7 +95,7 @@ public class PostServiceImpl implements PostService
         List<Post> postsinzip = new ArrayList<>();
         for (Post p : posts)
         {
-            if(p.getLocation().getZipcode() == zipcode)
+            if(p.getLocation() == zipcode)
             {
                 postsinzip.add(p);
             }

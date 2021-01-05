@@ -49,15 +49,15 @@ public class SeedData implements CommandLineRunner
         user2 = userService.save(user2);
         user3 = userService.save(user3);
 
-        Location l1 = new Location(84015);
-        Location l2 = new Location(12345);
+//        Location l1 = new Location(84015);
+//        Location l2 = new Location(12345);
+//
+//        l1 = locationService.save(l1);
+//        l2 = locationService.save(l2);
 
-        l1 = locationService.save(l1);
-        l2 = locationService.save(l2);
-
-        Post post1 = new Post("imgurl", "Dog Poop On Porch", "Someone put dog poop on my porch!", "1234 main St", "find it on your own.", "Clinton", "Utah", l1, user1);
-        Post post2 = new Post("imgurl", "Pot Hole", "There is a pot hole in front of my building. Unacceptable.", "1234 main St", "find it on your own.", "New York City", "New York", l2, user2);
-        Post post3 = new Post("imgurl", "Dirty Park. Save the Enviornment.", "There is trash littered all over this park.", "1234 main St", "It's hot so bring some water", "Queen Creek", "Arizona", l1, user1);
+        Post post1 = new Post("imgurl", "Dog Poop On Porch", "Someone put dog poop on my porch!", "1234 main St", "find it on your own.", "Clinton", "Utah", 84015, user1);
+        Post post2 = new Post("imgurl", "Pot Hole", "There is a pot hole in front of my building. Unacceptable.", "1234 main St", "find it on your own.", "New York City", "New York", 12345, user2);
+        Post post3 = new Post("imgurl", "Dirty Park. Save the Enviornment.", "There is trash littered all over this park.", "1234 main St", "It's hot so bring some water", "Queen Creek", "Arizona", 55555, user1);
 
         post1 = postService.save(post1);
         post2 = postService.save(post2);
