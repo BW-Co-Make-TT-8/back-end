@@ -25,7 +25,7 @@ public class User extends Auditable
             unique = true)
     private String username;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
@@ -68,6 +68,12 @@ public class User extends Auditable
 
     public User()
     {
+    }
+
+    public User(String username, String email)
+    {
+        this.username = username;
+        this.email = email;
     }
 
     public User(String username, String password, String email)

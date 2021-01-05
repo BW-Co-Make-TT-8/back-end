@@ -39,8 +39,8 @@ public class OpenController
 
     @Autowired
     private RoleService roleService;
-
-    @PostMapping(value = "/createnewuser",
+  
+    @PostMapping(value = "/signup",
             consumes = {"application/json"},
             produces = {"application/json"})
     public ResponseEntity<?> addSelf(
@@ -65,7 +65,7 @@ public class OpenController
         newuser = userService.save(newuser);
 
         HttpHeaders responseHeaders = new HttpHeaders();
-        URI newUserURI = ServletUriComponentsBuilder.fromUriString(httpServletRequest.getServerName() + ":" + httpServletRequest.getLocalPort() + "/users/user/{userId}")
+        URI newUserURI = ServletUriComponentsBuilder.fromUriString(httpServletRequest.getServerName() + ":" + httpServletRequest.getLocalPort() + "/users/{userId}")
                 .buildAndExpand(newuser.getUserid())
                 .toUri();
         responseHeaders.setLocation(newUserURI);

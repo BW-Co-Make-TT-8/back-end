@@ -34,28 +34,28 @@ public class UserController
     }
 
 //    Given a complete User Object, create a new User
-    @PostMapping(value = "/users",
-        consumes = "application/json")
-    public ResponseEntity<?> addNewUser(
-            @Valid
-            @RequestBody
-                User newuser) throws
-                                URISyntaxException
-    {
-        newuser.setUserid(0);
-        newuser = userService.save(newuser);
-
-        HttpHeaders responseHeaders = new HttpHeaders();
-        URI newUserURI = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{userid}")
-                .buildAndExpand(newuser.getUserid())
-                .toUri();
-        responseHeaders.setLocation(newUserURI);
-
-        return new ResponseEntity<>(null,
-                responseHeaders,
-                HttpStatus.CREATED);
-    }
+//    @PostMapping(value = "/users",
+//        consumes = "application/json")
+//    public ResponseEntity<?> addNewUser(
+//            @Valid
+//            @RequestBody
+//                User newuser) throws
+//                                URISyntaxException
+//    {
+//        newuser.setUserid(0);
+//        newuser = userService.save(newuser);
+//
+//        HttpHeaders responseHeaders = new HttpHeaders();
+//        URI newUserURI = ServletUriComponentsBuilder.fromCurrentRequest()
+//                .path("/{userid}")
+//                .buildAndExpand(newuser.getUserid())
+//                .toUri();
+//        responseHeaders.setLocation(newUserURI);
+//
+//        return new ResponseEntity<>(null,
+//                responseHeaders,
+//                HttpStatus.CREATED);
+//    }
 
 //    Given an userid, return a user
     @GetMapping(value = "/users/{userId}",
@@ -81,7 +81,19 @@ public class UserController
                 HttpStatus.OK);
     }
 
-    // Given an id and a json body, edit a specific user
+//    Given a string, return a list of users whose username contains said string
+    @GetMapping(value = "/users/name/like/{userName}",
+        produces = "application/json")
+    public ResponseEntity<?> getUserLikeName(
+            @PathVariable
+                String userName)
+    {
+        List<User> u = userService.findByNameContaining(userName);
+        return new ResponseEntity<>(u,
+                HttpStatus.OK);
+    }
+
+//    Given a userid and a json body, edit a specific user
     @PutMapping(value = "/users/{userid}",
         consumes = "application/json")
     public ResponseEntity<?> updateFullUser(
@@ -96,5 +108,17 @@ public class UserController
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+//    Given a userid, delete a specific user
+    @DeleteMapping(value = "/users/{userid}")
+    public ResponseEntity<?> deleteUserById(
+            @PathVariable
+                long id)
+    {
+        userService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+//    Given a userid, return all posts made by that user
 
 }
