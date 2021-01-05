@@ -110,7 +110,7 @@ public class UserController
     }
 
 //    Given a userid, delete a specific user
-    @DeleteMapping(value = "/users/{userid}")
+    @DeleteMapping(value = "/users/{id}")
     public ResponseEntity<?> deleteUserById(
             @PathVariable
                 long id)
