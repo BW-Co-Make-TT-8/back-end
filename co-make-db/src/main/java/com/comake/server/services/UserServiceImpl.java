@@ -52,6 +52,7 @@ public class UserServiceImpl implements UserService
     {
         userrepos.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User id " + id + " not found!"));
+        userrepos.deleteById(id);
     }
 
     @Override
