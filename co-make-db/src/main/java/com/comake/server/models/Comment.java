@@ -16,12 +16,12 @@ public class Comment extends Auditable
     private String commentbody;
 
     @ManyToOne
-    @JoinColumn(name = "userid", nullable = false)
+    @JoinColumn(name = "userid")
     @JsonIgnoreProperties(value = "comments", allowSetters = true)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "postid", nullable = false)
+    @JoinColumn(name = "postid")
     @JsonIgnoreProperties(value = {"comments", "post"}, allowSetters = true)
     private Post post;
 

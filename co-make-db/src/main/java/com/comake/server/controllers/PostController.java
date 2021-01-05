@@ -1,5 +1,6 @@
 package com.comake.server.controllers;
 
+import com.comake.server.models.Comment;
 import com.comake.server.models.Post;
 import com.comake.server.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,14 @@ public class PostController
 
         return new ResponseEntity<>(post, HttpStatus.OK);
     }
+
+//    @PostMapping(value = "/posts/post/{id}/comments", consumes = "application/json")
+//    public ResponseEntity<?> addNewComment(@RequestBody Comment newComment, @PathVariable long id)
+//    {
+//        Post post = postService.addNewComment(newComment, id);
+//
+//        return new ResponseEntity<>(post, HttpStatus.CREATED);
+//    }
 
     @PostMapping(value = "/posts", produces = "application/json")
     public ResponseEntity<?> addNewPost(@Valid @RequestBody Post newPost) throws URISyntaxException

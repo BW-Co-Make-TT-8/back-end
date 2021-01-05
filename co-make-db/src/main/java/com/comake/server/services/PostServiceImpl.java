@@ -82,7 +82,7 @@ public class PostServiceImpl implements PostService
     {
         List<Post> posts = new ArrayList<>();
         postRepository.findAll().iterator().forEachRemaining(posts::add);
-
+        System.out.println(posts);
         return posts;
     }
 
@@ -115,4 +115,18 @@ public class PostServiceImpl implements PostService
     {
         postRepository.deleteById(id);
     }
+
+//    @Override
+//    public Post addNewComment(Comment newComment, long id)
+//    {
+//        Comment comment = new Comment();
+//        comment.setCommentbody(newComment.getCommentbody());
+//        commentRepository.save(comment);
+//
+//        Post post;
+//        post = postRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Post with id " + id + " not found."));
+//        post.getComments().add(comment);
+//        System.out.println("NEW COMMENT ====> " + newComment);
+//        return postRepository.save(post);
+//    }
 }
