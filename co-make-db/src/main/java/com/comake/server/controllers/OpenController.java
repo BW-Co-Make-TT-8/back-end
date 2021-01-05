@@ -54,7 +54,7 @@ public class OpenController
      * @return The token access and other relevent data to token access. Status of CREATED. The location header to look up the new user.
      * @throws URISyntaxException we create some URIs during this method. If anything goes wrong with that creation, an exception is thrown.
      */
-    @PostMapping(value = "/createnewuser",
+    @PostMapping(value = "/signup",
             consumes = {"application/json"},
             produces = {"application/json"})
     public ResponseEntity<?> addSelf(
@@ -83,7 +83,7 @@ public class OpenController
         // set the location header for the newly created resource
         // The location comes from a different controller!
         HttpHeaders responseHeaders = new HttpHeaders();
-        URI newUserURI = ServletUriComponentsBuilder.fromUriString(httpServletRequest.getServerName() + ":" + httpServletRequest.getLocalPort() + "/users/user/{userId}")
+        URI newUserURI = ServletUriComponentsBuilder.fromUriString(httpServletRequest.getServerName() + ":" + httpServletRequest.getLocalPort() + "/users/{userId}")
                 .buildAndExpand(newuser.getUserid())
                 .toUri();
         responseHeaders.setLocation(newUserURI);
