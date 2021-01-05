@@ -1,4 +1,5 @@
 package com.comake.server.services;
+import com.comake.server.exceptions.ResourceFoundException;
 import com.comake.server.exceptions.ResourceNotFoundException;
 import com.comake.server.models.Role;
 import com.comake.server.models.User;
@@ -69,6 +70,11 @@ public class UserServiceImpl implements UserService
     public User save(User user)
     {
         User newUser = new User();
+
+//        if (user.getPosts().size() > 0)
+//        {
+//            throw new ResourceFoundException("Posts are not updated through users!");
+//        }
 
         if (user.getUserid() != 0)
         {
