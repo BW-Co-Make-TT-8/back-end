@@ -1,5 +1,6 @@
 package com.comake.server.controllers;
 
+import com.comake.server.models.Post;
 import com.comake.server.models.User;
 import com.comake.server.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,6 +92,14 @@ public class UserController
         List<User> u = userService.findByNameContaining(userName);
         return new ResponseEntity<>(u,
                 HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/users/{userid}/posts", produces = "application/json")
+    public ResponseEntity<?> getUsersPosts(@PathVariable long userid)
+    {
+        List<Post> posts = userService.getPosts(userid);
+
+        return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
 //    Given a userid and a json body, edit a specific user

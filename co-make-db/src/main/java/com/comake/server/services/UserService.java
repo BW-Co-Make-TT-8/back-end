@@ -1,5 +1,6 @@
 package com.comake.server.services;
 
+import com.comake.server.models.Post;
 import com.comake.server.models.User;
 
 import java.util.List;
@@ -23,4 +24,6 @@ public interface UserService
             long id);
 
     public void deleteAll();
+
+    List<Post> getPosts(long userid);
 }

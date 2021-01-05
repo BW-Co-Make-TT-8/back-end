@@ -1,6 +1,7 @@
 package com.comake.server.services;
 import com.comake.server.exceptions.ResourceFoundException;
 import com.comake.server.exceptions.ResourceNotFoundException;
+import com.comake.server.models.Post;
 import com.comake.server.models.Role;
 import com.comake.server.models.User;
 import com.comake.server.models.UserRoles;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -156,5 +158,15 @@ public class UserServiceImpl implements UserService
     public void deleteAll()
     {
         userrepos.deleteAll();
+    }
+
+    @Override
+    public List<Post> getPosts(long userid)
+    {
+//        List<Post> usersPosts = new ArrayList<>();
+        User user = new User();
+        user = userrepos.findById(userid).orElseThrow(() -> new EntityNotFoundException("User with id " + userid + " not found."));
+
+        return user.getPosts();
     }
 }
