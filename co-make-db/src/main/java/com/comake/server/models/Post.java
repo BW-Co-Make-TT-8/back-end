@@ -33,10 +33,12 @@ public class Post extends Auditable
     @Column(nullable = false)
     private String state;
 
-    @ManyToOne
-    @JoinColumn(name = "locationid", nullable = false)
-    @JsonIgnoreProperties(value = "posts", allowSetters = true)
-    private Location location;
+//    @ManyToOne
+//    @JoinColumn(name = "locationid", nullable = false)
+//    @JsonIgnoreProperties(value = "posts", allowSetters = true)
+//    private Location location;
+    @Column(nullable = false)
+    private long location;
 
     @ManyToOne
     @JoinColumn(name = "userid", nullable = false)
@@ -51,7 +53,7 @@ public class Post extends Auditable
     {
     }
 
-    public Post(String imgurl, String title, String postbody, String streetaddress, String addressnotes, String city, String state, Location location, User user)
+    public Post(String imgurl, String title, String postbody, String streetaddress, String addressnotes, String city, String state, long location, User user)
     {
         this.imgurl = imgurl;
         this.title = title;
@@ -144,12 +146,12 @@ public class Post extends Auditable
         this.state = state;
     }
 
-    public Location getLocation()
+    public long getLocation()
     {
         return location;
     }
 
-    public void setLocation(Location location)
+    public void setLocation(long location)
     {
         this.location = location;
     }

@@ -53,12 +53,12 @@ public class User extends Auditable
     private Set<UserRoles> roles = new HashSet<>();
 
 //    @Id
-    @ManyToOne
-    @JoinColumn(name = "locationid")
-    @JsonIgnoreProperties(value = "user",
-        allowSetters = true)
-    private Location location;
-
+//    @ManyToOne
+//    @JoinColumn(name = "locationid")
+//    @JsonIgnoreProperties(value = "user",
+//        allowSetters = true)
+//    private Location location;
+    private long location;
 
 //    @OneToMany(mappedBy = "user",
 //            cascade = CascadeType.ALL,
@@ -153,12 +153,12 @@ public class User extends Auditable
         this.posts = posts;
     }
 
-    public Location getLocation()
+    public long getLocation()
     {
         return location;
     }
 
-    public void setLocation(Location location)
+    public void setLocation(long location)
     {
         this.location = location;
     }
