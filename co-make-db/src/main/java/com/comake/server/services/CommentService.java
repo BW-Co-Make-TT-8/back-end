@@ -8,5 +8,5 @@ public interface CommentService
 
     Comment findCommentById(long id);
 
-    Comment addNewComment(Comment newComment, long id);
+//    Comment addNewComment(Comment newComment, long id);
 }

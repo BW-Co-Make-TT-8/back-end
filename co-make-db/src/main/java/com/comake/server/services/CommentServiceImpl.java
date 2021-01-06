@@ -35,17 +35,17 @@ public class CommentServiceImpl implements CommentService
         return comment;
     }
 
-    @Override
-    public Comment addNewComment(Comment newComment, long id)
-    {
-        Comment comment = new Comment();
-        comment.setCommentbody(newComment.getCommentbody());
-        commentRepository.save(comment);
-        Post post;
-        post = postRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Post with id " + id + " not found."));
-        post.getComments().add(comment);
-        postRepository.save(post);
-
-        return comment;
-    }
+//    @Override
+//    public Comment addNewComment(Comment newComment, long id)
+//    {
+//        Comment comment = new Comment();
+//        comment.setCommentbody(newComment.getCommentbody());
+//        commentRepository.save(comment);
+//        Post post;
+//        post = postRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Post with id " + id + " not found."));
+//        post.getComments().add(comment);
+//        postRepository.save(post);
+//
+//        return comment;
+//    }
 }

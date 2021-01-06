@@ -94,13 +94,13 @@ public class UserController
                 HttpStatus.OK);
     }
 
-    @GetMapping(value = "/users/{userid}/posts", produces = "application/json")
-    public ResponseEntity<?> getUsersPosts(@PathVariable long userid)
-    {
-        List<Post> posts = userService.getPosts(userid);
-
-        return new ResponseEntity<>(posts, HttpStatus.OK);
-    }
+//    @GetMapping(value = "/users/{userid}/posts", produces = "application/json")
+//    public ResponseEntity<?> getUsersPosts(@PathVariable long userid)
+//    {
+//        List<Post> posts = userService.getPosts(userid);
+//
+//        return new ResponseEntity<>(posts, HttpStatus.OK);
+//    }
 
 //    Given a userid and a json body, edit a specific user
     @PutMapping(value = "/users/{userid}",

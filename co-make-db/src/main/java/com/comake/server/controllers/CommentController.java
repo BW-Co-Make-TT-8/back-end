@@ -24,7 +24,7 @@ public class CommentController
     @PostMapping(value = "/posts/post/{id}/comments", consumes = "application/json")
     public ResponseEntity<?> addNewComment(@RequestBody Comment newComment, @PathVariable long id)
     {
-        Comment comment = commentService.addNewComment(newComment, id);
+        Comment comment = commentService.save(newComment);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
