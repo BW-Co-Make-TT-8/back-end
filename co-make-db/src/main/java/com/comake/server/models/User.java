@@ -76,11 +76,12 @@ public class User extends Auditable
         this.email = email;
     }
 
-    public User(String username, String password, String email)
+    public User(String username, String password, String email, long location)
     {
         setUsername(username);
         setPassword(password);
         this.email = email;
+        this.location = location;
     }
 
     public long getUserid()
