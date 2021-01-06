@@ -8,6 +8,8 @@ public class UserMinimum
 
     private String password;
 
+    private long location;
+
     @Email
     private String email;
 
@@ -39,5 +41,15 @@ public class UserMinimum
     public void setEmail(String email)
     {
         this.email = email;
+    }
+
+    public long getLocation()
+    {
+        return location;
+    }
+
+    public void setLocation(long location)
+    {
+        this.location = location;
     }
 }

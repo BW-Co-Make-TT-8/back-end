@@ -56,7 +56,7 @@ public class OpenController
         newuser.setUsername(newminuser.getUsername());
         newuser.setPassword(newminuser.getPassword());
         newuser.setEmail(newminuser.getEmail());
-        newuser.setLocation(newminuser.ge);
+        newuser.setLocation(newminuser.getLocation());
 
         Set<UserRoles> newRoles = new HashSet<>();
         newRoles.add(new UserRoles(newuser,
