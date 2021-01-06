@@ -35,12 +35,12 @@ public class Comment extends Auditable
         this.commentbody = commentbody;
     }
 
-    public Comment(String commentbody, User user, Post post)
-    {
-        this.commentbody = commentbody;
-        this.user = user;
-        this.post = post;
-    }
+//    public Comment(String commentbody, User user, Post post)
+//    {
+//        this.commentbody = commentbody;
+//        this.user = user;
+//        this.post = post;
+//    }
 
     public long getCommentid()
     {
