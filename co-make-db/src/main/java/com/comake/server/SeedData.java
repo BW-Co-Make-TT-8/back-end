@@ -15,8 +15,8 @@ public class SeedData implements CommandLineRunner
     @Autowired
     private CommentService commentService;
 
-    @Autowired
-    private LocationService locationService;
+//    @Autowired
+//    private LocationService locationService;
 
     @Autowired
     private PostService postService;
@@ -26,6 +26,9 @@ public class SeedData implements CommandLineRunner
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserPostService userPostService;
 
     @Transactional
     @Override
@@ -55,13 +58,15 @@ public class SeedData implements CommandLineRunner
 //        l1 = locationService.save(l1);
 //        l2 = locationService.save(l2);
 
-        Post post1 = new Post("imgurl", "Dog Poop On Porch", "Someone put dog poop on my porch!", "1234 main St", "find it on your own.", "Clinton", "Utah", 84015, user1);
-        Post post2 = new Post("imgurl", "Pot Hole", "There is a pot hole in front of my building. Unacceptable.", "1234 main St", "find it on your own.", "New York City", "New York", 12345, user2);
-        Post post3 = new Post("imgurl", "Dirty Park. Save the Enviornment.", "There is trash littered all over this park.", "1234 main St", "It's hot so bring some water", "Queen Creek", "Arizona", 55555, user1);
+        Post post1 = new Post("imgurl", "Dog Poop On Porch", "Someone put dog poop on my porch!", "1234 main St", "find it on your own.", "Clinton", "Utah", 84015);
+        Post post2 = new Post("imgurl", "Pot Hole", "There is a pot hole in front of my building. Unacceptable.", "1234 main St", "find it on your own.", "New York City", "New York", 12345);
+        Post post3 = new Post("imgurl", "Dirty Park. Save the Enviornment.", "There is trash littered all over this park.", "1234 main St", "It's hot so bring some water", "Queen Creek", "Arizona", 55555);
 
         post1 = postService.save(post1);
         post2 = postService.save(post2);
         post3 = postService.save(post3);
+
+        userPostService.save(user1.getUserid(), post1.getPostid());
 
         Comment com1 = new Comment("This is my comment on this particular issue: great.", user1, post1);
         Comment com2 = new Comment("This is my comment on this particular issue: this sucks.", user2, post1);

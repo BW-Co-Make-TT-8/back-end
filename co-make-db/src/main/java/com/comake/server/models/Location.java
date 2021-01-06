@@ -6,8 +6,8 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "locations")
+//@Entity
+//@Table(name = "locations")
 public class Location extends Auditable
 {
     @Id

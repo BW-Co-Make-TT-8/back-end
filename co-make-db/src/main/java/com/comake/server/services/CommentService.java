@@ -7,4 +7,6 @@ public interface CommentService
     Comment save(Comment comment);
 
     Comment findCommentById(long id);
+
+//    Comment addNewComment(Comment newComment, long id);
 }

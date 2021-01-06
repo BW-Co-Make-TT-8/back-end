@@ -25,5 +25,5 @@ public interface UserService
 
     public void deleteAll();
 
-    List<Post> getPosts(long userid);
+//    List<Post> getPosts(long userid);
 }

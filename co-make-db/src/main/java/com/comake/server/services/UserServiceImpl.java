@@ -72,6 +72,11 @@ public class UserServiceImpl implements UserService
     @Override
     public User save(User user)
     {
+        if (user.getUserPosts().size() > 0)
+        {
+            throw new ResourceFoundException("Don't update UserPosts through posts!");
+        }
+
         User newUser = new User();
 
 //        if (user.getPosts().size() > 0)
@@ -160,13 +165,13 @@ public class UserServiceImpl implements UserService
         userrepos.deleteAll();
     }
 
-    @Override
-    public List<Post> getPosts(long userid)
-    {
+//    @Override
+//    public List<Post> getPosts(long userid)
+//    {
 //        List<Post> usersPosts = new ArrayList<>();
-        User user = new User();
-        user = userrepos.findById(userid).orElseThrow(() -> new EntityNotFoundException("User with id " + userid + " not found."));
-
-        return user.getPosts();
-    }
+//        User user = new User();
+//        user = userrepos.findById(userid).orElseThrow(() -> new EntityNotFoundException("User with id " + userid + " not found."));
+//
+//        return user.get;
+//    }
 }

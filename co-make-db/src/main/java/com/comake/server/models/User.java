@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import springfox.documentation.spring.web.json.Json;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -43,13 +44,14 @@ public class User extends Auditable
     @OneToMany(mappedBy = "user",
         cascade = CascadeType.ALL,
         orphanRemoval = true)
-    @JsonIgnoreProperties(value = "user", allowSetters = true)
-    private List<Post> posts = new ArrayList<>();
+    @JsonIgnoreProperties(value = {"user"}, allowSetters = true)
+    private Set<UserPost> userPosts = new HashSet<>();
 
     @OneToMany(mappedBy = "user",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    @JsonIgnoreProperties(value = "user", allowSetters = true)
+    @JsonIgnoreProperties(value = {"user", "roles"}, allowSetters = true)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<UserRoles> roles = new HashSet<>();
 
 //    @Id
@@ -150,15 +152,15 @@ public class User extends Auditable
         this.comments = comments;
     }
 
-    public List<Post> getPosts()
-    {
-        return posts;
-    }
-
-    public void setPosts(List<Post> posts)
-    {
-        this.posts = posts;
-    }
+//    public List<Post> getPosts()
+//    {
+//        return posts;
+//    }
+//
+//    public void setPosts(List<Post> posts)
+//    {
+//        this.posts = posts;
+//    }
 
     public long getLocation()
     {
@@ -168,6 +170,16 @@ public class User extends Auditable
     public void setLocation(long location)
     {
         this.location = location;
+    }
+
+    public Set<UserPost> getUserPosts()
+    {
+        return userPosts;
+    }
+
+    public void setUserPosts(Set<UserPost> userPosts)
+    {
+        this.userPosts = userPosts;
     }
 
     //    public List<Useremail> getUseremails()

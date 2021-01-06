@@ -3,8 +3,8 @@ package com.comake.server.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "posts")
@@ -40,20 +40,34 @@ public class Post extends Auditable
     @Column(nullable = false)
     private long location;
 
-    @ManyToOne
-    @JoinColumn(name = "userid", nullable = false)
-    @JsonIgnoreProperties(value = {"posts", "comments"}, allowSetters = true)
-    private User user;
+//    @Id
+////    @ManyToOne
+////    @JoinColumn(name = "userid", nullable = false)
+////    @JsonIgnoreProperties(value = {"posts", "comments", "roles"}, allowSetters = true)
+////    private User user;
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties(value = {"post", "user", "userPosts"}, allowSetters = true)
+    private Set<UserPost> userPosts = new HashSet<>();
 
-    @OneToMany(mappedBy = "post", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = {"post", "user"}, allowSetters = true)
-    private List<Comment> comments = new ArrayList<>();
+    private Set<Comment> comments = new HashSet<>();
 
     public Post()
     {
     }
 
-    public Post(String imgurl, String title, String postbody, String streetaddress, String addressnotes, String city, String state, long location, User user)
+//    public Post(String title, String postbody, String streetaddress, String city, String state, long location)
+//    {
+//        this.title = title;
+//        this.postbody = postbody;
+//        this.streetaddress = streetaddress;
+//        this.city = city;
+//        this.state = state;
+//        this.location = location;
+//    }
+
+    public Post(String imgurl, String title, String postbody, String streetaddress, String addressnotes, String city, String state, long location)
     {
         this.imgurl = imgurl;
         this.title = title;
@@ -63,7 +77,7 @@ public class Post extends Auditable
         this.city = city;
         this.state = state;
         this.location = location;
-        this.user = user;
+//        this.user = user;
     }
 
     public long getPostid()
@@ -156,23 +170,33 @@ public class Post extends Auditable
         this.location = location;
     }
 
-    public User getUser()
-    {
-        return user;
-    }
+//    public User getUser()
+//    {
+//        return user;
+//    }
+//
+//    public void setUser(User user)
+//    {
+//        this.user = user;
+//    }
 
-    public void setUser(User user)
-    {
-        this.user = user;
-    }
-
-    public List<Comment> getComments()
+    public Set<Comment> getComments()
     {
         return comments;
     }
 
-    public void setComments(List<Comment> comments)
+    public void setComments(Set<Comment> comments)
     {
         this.comments = comments;
+    }
+
+    public Set<UserPost> getUserPosts()
+    {
+        return userPosts;
+    }
+
+    public void setUserPosts(Set<UserPost> userPosts)
+    {
+        this.userPosts = userPosts;
     }
 }

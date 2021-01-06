@@ -1,11 +1,12 @@
 package com.comake.server.services;
 
+import com.comake.server.exceptions.ResourceFoundException;
 import com.comake.server.exceptions.ResourceNotFoundException;
 import com.comake.server.models.Comment;
 import com.comake.server.models.Location;
 import com.comake.server.models.Post;
 import com.comake.server.repository.CommentRepository;
-import com.comake.server.repository.LocationRepository;
+//import com.comake.server.repository.LocationRepository;
 import com.comake.server.repository.PostRepository;
 import com.mifmif.common.regex.util.Iterator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,17 @@ public class PostServiceImpl implements PostService
     @Autowired
     CommentRepository commentRepository;
 
-    @Autowired
-    LocationRepository locationRepository;
+//    @Autowired
+//    LocationRepository locationRepository;
 
     @Override
     public Post save(Post post)
     {
+        if (post.getUserPosts().size() > 0)
+        {
+            throw new ResourceFoundException("Don't update UserPosts through posts!");
+        }
+
         Post newPost = new Post();
 
         if (post.getPostid() != 0)
@@ -65,13 +71,13 @@ public class PostServiceImpl implements PostService
 //            }
 //        }
 
-        newPost.setUser(post.getUser());
+//        newPost.setUser(post.getUser());
 
         for (Comment c : post.getComments())
         {
             Comment newComment = commentRepository.findById(c.getCommentid())
                     .orElseThrow(() -> new ResourceNotFoundException("Comment with id " + c.getCommentid() + " not found."));
-            newPost.getComments().add(newComment);
+            newPost.setComments(post.getComments());
         }
 
         return postRepository.save(newPost);
@@ -82,7 +88,7 @@ public class PostServiceImpl implements PostService
     {
         List<Post> posts = new ArrayList<>();
         postRepository.findAll().iterator().forEachRemaining(posts::add);
-
+        System.out.println(posts);
         return posts;
     }
 
@@ -115,4 +121,18 @@ public class PostServiceImpl implements PostService
     {
         postRepository.deleteById(id);
     }
+
+//    @Override
+//    public Post addNewComment(Comment newComment, long id)
+//    {
+//        Comment comment = new Comment();
+//        comment.setCommentbody(newComment.getCommentbody());
+//        commentRepository.save(comment);
+//
+//        Post post;
+//        post = postRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Post with id " + id + " not found."));
+//        post.getComments().add(comment);
+//        System.out.println("NEW COMMENT ====> " + newComment);
+//        return postRepository.save(post);
+//    }
 }
