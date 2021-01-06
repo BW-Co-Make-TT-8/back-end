@@ -8,6 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "posts")
+@JsonIgnoreProperties(value = "userPosts")
 public class Post extends Auditable
 {
     @Id
@@ -46,12 +47,12 @@ public class Post extends Auditable
 ////    @JsonIgnoreProperties(value = {"posts", "comments", "roles"}, allowSetters = true)
 ////    private User user;
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties(value = {"post", "user", "userPosts"}, allowSetters = true)
+    @JsonIgnoreProperties(value = {"post", "user"}, allowSetters = true)
     private Set<UserPost> userPosts = new HashSet<>();
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = {"post", "user"}, allowSetters = true)
-    private Set<Comment> comments = new HashSet<>();
+    private Set<PostComments> comments = new HashSet<>();
 
     public Post()
     {
@@ -180,12 +181,12 @@ public class Post extends Auditable
 //        this.user = user;
 //    }
 
-    public Set<Comment> getComments()
+    public Set<PostComments> getComments()
     {
         return comments;
     }
 
-    public void setComments(Set<Comment> comments)
+    public void setComments(Set<PostComments> comments)
     {
         this.comments = comments;
     }

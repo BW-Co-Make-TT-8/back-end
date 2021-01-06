@@ -17,5 +17,7 @@ public interface PostService
 
     void delete(Long id);
 
+    void deleteComment(long postid, long commentid);
+
 //    Post addNewComment(Comment , long );
 }
