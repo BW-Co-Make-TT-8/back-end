@@ -29,13 +29,13 @@ public class PostCommentServiceImpl implements PostCommentService
         return postCommentRepository.save(postComments);
     }
 
-    @Override
-    public void deleteComment(long postid, long commentid)
-    {
-        Post post = postService.findPostById(postid);
-        Comment comment = commentService.findCommentById(commentid);
-        PostComments postComments = postCommentRepository.findById(new PostCommentsId(postid, commentid)).orElseThrow(() -> new EntityNotFoundException("Post with this id was not found"));
-
-        postCommentRepository.deleteById(new PostCommentsId(postid, commentid));
-    }
+//    @Override
+//    public void deleteComment(long postid, long commentid)
+//    {
+//        Post post = postService.findPostById(postid);
+//        Comment comment = commentService.findCommentById(commentid);
+//        PostComments postComments = postCommentRepository.findById(new PostCommentsId(postid, commentid)).orElseThrow(() -> new EntityNotFoundException("Post with this id was not found"));
+//
+//        postCommentRepository.deleteById(new PostCommentsId(postid, commentid));
+//    }
 }

@@ -48,13 +48,13 @@ public class CommentController
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/posts/post/{postid}/comments/{commentid}")
-    public ResponseEntity<?> deleteComment(@PathVariable long postid, @PathVariable long commentid)
-    {
-        commentService.deleteCommentById(commentid);
-        postService.deleteComment(postid, commentid);
-        postCommentService.deleteComment(postid, commentid);
-
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+//    @DeleteMapping(value = "/posts/post/{postid}/comments/{commentid}")
+//    public ResponseEntity<?> deleteComment(@PathVariable long postid, @PathVariable long commentid)
+//    {
+//        commentService.deleteCommentById(commentid);
+//        postService.deleteComment(postid, commentid);
+//        postCommentService.deleteComment(postid, commentid);
+//
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 }

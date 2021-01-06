@@ -7,5 +7,5 @@ public interface PostCommentService
 {
     PostComments save(long postid, long commentid);
 
-    void deleteComment(long postid, long commentid);
+//    void deleteComment(long postid, long commentid);
 }
