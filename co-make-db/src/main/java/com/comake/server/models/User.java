@@ -60,6 +60,7 @@ public class User extends Auditable
 //    @JsonIgnoreProperties(value = "user",
 //        allowSetters = true)
 //    private Location location;
+    @Column
     private long location;
 
 //    @OneToMany(mappedBy = "user",
@@ -83,6 +84,14 @@ public class User extends Auditable
         setUsername(username);
         setPassword(password);
         this.email = email;
+    }
+
+    public User(String username, String password, @Email String email, long location)
+    {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.location = location;
     }
 
     public long getUserid()
