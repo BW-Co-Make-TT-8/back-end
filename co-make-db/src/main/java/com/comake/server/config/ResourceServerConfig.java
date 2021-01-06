@@ -38,7 +38,7 @@ public class ResourceServerConfig
                         "/login",
                         "/createnewuser")
                 .permitAll()
-                .antMatchers(HttpMethod.GET, "/posts").hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/posts").hasAnyRole("ADMIN", "USER")
                 .antMatchers(HttpMethod.GET, "/posts/{zipcode}").hasAnyRole("ADMIN", "USER")
                 .antMatchers(HttpMethod.GET, "/posts/post/{id}").hasAnyRole("ADMIN", "USER")
                 .antMatchers(HttpMethod.DELETE, "/posts/post/{id}").hasAnyRole("ADMIN", "USER")
