@@ -60,7 +60,7 @@ public class User extends Auditable
 //    @JsonIgnoreProperties(value = "user",
 //        allowSetters = true)
 //    private Location location;
-    @Column
+    @Column(nullable = false)
     private long location;
 
 //    @OneToMany(mappedBy = "user",
