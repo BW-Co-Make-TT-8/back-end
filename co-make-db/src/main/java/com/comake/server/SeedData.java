@@ -30,8 +30,8 @@ public class SeedData implements CommandLineRunner
     @Autowired
     private UserPostService userPostService;
 
-    @Autowired
-    private PostCommentService postCommentService;
+//    @Autowired
+//    private PostCommentService postCommentService;
 
     @Transactional
     @Override
@@ -71,16 +71,16 @@ public class SeedData implements CommandLineRunner
 
         userPostService.save(user1.getUserid(), post1.getPostid());
 
-        Comment com1 = new Comment("This is my comment on this particular issue: great.");
-        Comment com2 = new Comment("This is my comment on this particular issue: this sucks.");
-        Comment com3 = new Comment("This is my comment on this particular issue: awesome.");
+        Comment com1 = new Comment("This is my comment on this particular issue: great.", user1, post1);
+        Comment com2 = new Comment("This is my comment on this particular issue: this sucks.", user1, post1);
+        Comment com3 = new Comment("This is my comment on this particular issue: awesome.", user1, post1);
 
         com1 = commentService.save(com1);
         com2 = commentService.save(com2);
         com3 = commentService.save(com3);
 
-        postCommentService.save(post1.getPostid(), com1.getCommentid());
-        postCommentService.save(post1.getPostid(), com2.getCommentid());
-        postCommentService.save(post1.getPostid(), com3.getCommentid());
+//        postCommentService.save(post1.getPostid(), com1.getCommentid());
+//        postCommentService.save(post1.getPostid(), com2.getCommentid());
+//        postCommentService.save(post1.getPostid(), com3.getCommentid());
     }
 }

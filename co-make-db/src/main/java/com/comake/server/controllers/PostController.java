@@ -41,7 +41,7 @@ public class PostController
         return new ResponseEntity<>(myPosts, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/posts/post/{id}", produces = "application/json")
+    @GetMapping(value = "/posts/{id}", produces = "application/json")
     public ResponseEntity<?> findPostById(@PathVariable Long id)
     {
         Post post = postService.findPostById(id);
@@ -74,7 +74,7 @@ public class PostController
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
     }
 
-    @PutMapping(value = "/users/{userid}/posts/post/{postid}", produces = "application/json")
+    @PutMapping(value = "/users/{userid}/posts/{postid}", produces = "application/json")
     public ResponseEntity<?> editExistingPost(@Valid @RequestBody Post newPost, @PathVariable Long postid, @PathVariable Long userid)
     {
         newPost.setPostid(postid);
@@ -84,7 +84,7 @@ public class PostController
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/posts/post/{id}", produces = "application/json")
+    @DeleteMapping(value = "/posts/{id}", produces = "application/json")
     public ResponseEntity<?> deletePost(@PathVariable Long id)
     {
         postService.delete(id);

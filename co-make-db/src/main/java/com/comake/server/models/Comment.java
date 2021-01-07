@@ -3,10 +3,12 @@ package com.comake.server.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "comments")
-public class Comment extends Auditable
+public class Comment extends Auditable implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,13 +17,12 @@ public class Comment extends Auditable
     @Column(nullable = false)
     private String commentbody;
 
-
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "userid")
     @JsonIgnoreProperties(value = {"comments", "roles"}, allowSetters = true)
     private User user;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "postid")
     @JsonIgnoreProperties(value = {"comments", "post"}, allowSetters = true)
     private Post post;
@@ -30,17 +31,12 @@ public class Comment extends Auditable
     {
     }
 
-    public Comment(String commentbody)
+    public Comment(String commentbody, User user, Post post)
     {
         this.commentbody = commentbody;
+        this.user = user;
+        this.post = post;
     }
-
-//    public Comment(String commentbody, User user, Post post)
-//    {
-//        this.commentbody = commentbody;
-//        this.user = user;
-//        this.post = post;
-//    }
 
     public long getCommentid()
     {
@@ -80,5 +76,20 @@ public class Comment extends Auditable
     public void setPost(Post post)
     {
         this.post = post;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Comment comment = (Comment) o;
+        return getCommentid() == comment.getCommentid() && getCommentbody().equals(comment.getCommentbody()) && getUser().equals(comment.getUser()) && getPost().equals(comment.getPost());
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(getCommentid(), getCommentbody(), getUser(), getPost());
     }
 }

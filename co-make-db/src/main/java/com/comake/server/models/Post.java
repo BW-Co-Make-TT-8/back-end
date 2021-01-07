@@ -3,7 +3,9 @@ package com.comake.server.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -52,7 +54,7 @@ public class Post extends Auditable
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = {"post", "user"}, allowSetters = true)
-    private Set<PostComments> comments = new HashSet<>();
+    private List<Comment> comments = new ArrayList<>();
 
     public Post()
     {
@@ -181,12 +183,13 @@ public class Post extends Auditable
 //        this.user = user;
 //    }
 
-    public Set<PostComments> getComments()
+
+    public List<Comment> getComments()
     {
         return comments;
     }
 
-    public void setComments(Set<PostComments> comments)
+    public void setComments(List<Comment> comments)
     {
         this.comments = comments;
     }

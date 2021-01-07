@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service(value = "commentService")
 public class CommentServiceImpl implements CommentService
@@ -39,6 +41,24 @@ public class CommentServiceImpl implements CommentService
     public void deleteCommentById(long commentid)
     {
         commentRepository.deleteById(commentid);
+    }
+
+    @Override
+    public List<Comment> findAllUserComments(long userid)
+    {
+        List<Comment> comments = new ArrayList<>();
+        commentRepository.findAll().iterator().forEachRemaining(comments::add);
+        List<Comment> rtnComments = new ArrayList<>();
+
+        for (Comment c : comments)
+        {
+            if (c.getUser().getUserid() == userid)
+            {
+                rtnComments.add(c);
+            }
+        }
+        
+        return rtnComments;
     }
 
 //    @Override
