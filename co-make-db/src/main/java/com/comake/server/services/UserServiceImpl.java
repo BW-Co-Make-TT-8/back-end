@@ -165,6 +165,14 @@ public class UserServiceImpl implements UserService
         userrepos.deleteAll();
     }
 
+    @Override
+    public User findByUsername(String name)
+    {
+        User user = userrepos.findByUsername(name);
+
+        return user;
+    }
+
 //    @Override
 //    public List<Post> getPosts(long userid)
 //    {

@@ -25,5 +25,7 @@ public interface UserService
 
     public void deleteAll();
 
+    User findByUsername(String name);
+
 //    List<Post> getPosts(long userid);
 }
