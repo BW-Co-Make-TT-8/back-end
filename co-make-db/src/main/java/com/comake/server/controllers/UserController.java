@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -104,5 +105,14 @@ public class UserController
     {
         userService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/userinfo",
+            produces = {"application/json"})
+    public ResponseEntity<?> getCurrentUserInfo(Authentication authentication)
+    {
+        User u = userService.findByUsername(authentication.getName());
+        return new ResponseEntity<>(u,
+                HttpStatus.OK);
     }
 }
