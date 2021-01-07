@@ -33,7 +33,7 @@ public class PostController
         return new ResponseEntity<>(myPosts, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/posts/{zipcode}", produces = "application/json")
+    @GetMapping(value = "/posts/zipcode/{zipcode}", produces = "application/json")
     public ResponseEntity<?> listPostsByZip(@PathVariable Long zipcode)
     {
         List<Post> myPosts = postService.findPostsByZip(zipcode);
