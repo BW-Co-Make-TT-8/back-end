@@ -40,21 +40,17 @@ public class ResourceServerConfig
                 .permitAll()
                 .antMatchers(HttpMethod.GET, "/posts").hasAnyRole("ADMIN", "USER")
                 .antMatchers(HttpMethod.GET, "/posts/{zipcode}").hasAnyRole("ADMIN", "USER")
-                .antMatchers(HttpMethod.GET, "/posts/post/{id}").hasAnyRole("ADMIN", "USER")
-                .antMatchers(HttpMethod.DELETE, "/posts/post/{id}").hasAnyRole("ADMIN", "USER")
-                .antMatchers(HttpMethod.PUT, "/posts/post/{id}").hasAnyRole("ADMIN", "USER")
+                .antMatchers(HttpMethod.GET, "/posts/{id}").hasAnyRole("ADMIN", "USER")
+                .antMatchers(HttpMethod.DELETE, "/posts/{id}").hasAnyRole("ADMIN", "USER")
+                .antMatchers(HttpMethod.PUT, "/posts/{id}").hasAnyRole("ADMIN", "USER")
                 .antMatchers(HttpMethod.POST, "/posts").hasAnyRole("ADMIN", "USER")
                 .antMatchers(HttpMethod.GET, "/users").hasAnyRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/users/{userId}").hasAnyRole("ADMIN", "USER")
                 .antMatchers(HttpMethod.GET, "/users/name/{userName}").hasAnyRole("ADMIN", "USER")
-                .antMatchers(HttpMethod.GET, "/users/name/like/{userName}").hasAnyRole("ADMIN", "USER")
+                .antMatchers(HttpMethod.GET, "/users/like-name/{userName}").hasAnyRole("ADMIN", "USER")
                 .antMatchers(HttpMethod.GET, "/users/{userid}/posts").hasAnyRole("ADMIN", "USER")
                 .antMatchers(HttpMethod.PUT, "/users/{id}").hasAnyRole("ADMIN", "USER")
                 .antMatchers(HttpMethod.DELETE, "/users/{id}").hasAnyRole("ADMIN", "USER")
-//                .antMatchers("/users/**",
-//                        "/useremails/**",
-//                        "/oauth/revoke-token",
-//                        "/logout")
                 .antMatchers("/oauth/revoke-token",
                         "/logout")
                 .authenticated()

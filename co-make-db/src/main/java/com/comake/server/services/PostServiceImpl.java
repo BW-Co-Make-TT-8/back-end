@@ -5,7 +5,7 @@ import com.comake.server.exceptions.ResourceNotFoundException;
 import com.comake.server.models.*;
 import com.comake.server.repository.CommentRepository;
 //import com.comake.server.repository.LocationRepository;
-import com.comake.server.repository.PostCommentRepository;
+//import com.comake.server.repository.PostCommentRepository;
 import com.comake.server.repository.PostRepository;
 import com.mifmif.common.regex.util.Iterator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +24,8 @@ public class PostServiceImpl implements PostService
     @Autowired
     CommentRepository commentRepository;
 
-    @Autowired
-    PostCommentRepository postCommentRepository;
+//    @Autowired
+//    PostCommentRepository postCommentRepository;
 
 //    @Autowired
 //    LocationRepository locationRepository;
@@ -75,10 +75,10 @@ public class PostServiceImpl implements PostService
 
 //        newPost.setUser(post.getUser());
 
-        for (PostComments c : post.getComments())
+        for (Comment c : post.getComments())
         {
-            PostComments newComment = postCommentRepository.findById(new PostCommentsId(post.getPostid(), c.getComment().getCommentid()))
-                    .orElse(new PostComments(newPost, c.getComment()));
+            Comment newComment = commentRepository.findById(c.getCommentid())
+                    .orElseThrow(() -> new EntityNotFoundException("Comment with id " + c.getCommentid() + " not found."));
             newPost.getComments().add(newComment);
         }
 
@@ -123,6 +123,12 @@ public class PostServiceImpl implements PostService
     public void delete(Long id)
     {
         postRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteComment(long postid, long commentid)
+    {
+
     }
 
 //    @Override

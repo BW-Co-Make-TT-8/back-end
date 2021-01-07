@@ -20,6 +20,7 @@ public class User extends Auditable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "userid")
     private long userid;
 
     @Column(nullable = false,

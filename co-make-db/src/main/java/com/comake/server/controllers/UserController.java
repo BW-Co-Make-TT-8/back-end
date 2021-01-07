@@ -1,7 +1,9 @@
 package com.comake.server.controllers;
 
+import com.comake.server.models.Comment;
 import com.comake.server.models.Post;
 import com.comake.server.models.User;
+import com.comake.server.services.CommentService;
 import com.comake.server.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -23,7 +25,9 @@ public class UserController
     @Autowired
     private UserService userService;
 
-//    Return a list of all users
+    @Autowired
+    private CommentService commentService;
+
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping(value = "/users",
         produces = "application/json")
@@ -34,31 +38,17 @@ public class UserController
                 HttpStatus.OK);
     }
 
-//    Given a complete User Object, create a new User
-//    @PostMapping(value = "/users",
-//        consumes = "application/json")
-//    public ResponseEntity<?> addNewUser(
-//            @Valid
-//            @RequestBody
-//                User newuser) throws
-//                                URISyntaxException
-//    {
-//        newuser.setUserid(0);
-//        newuser = userService.save(newuser);
-//
-//        HttpHeaders responseHeaders = new HttpHeaders();
-//        URI newUserURI = ServletUriComponentsBuilder.fromCurrentRequest()
-//                .path("/{userid}")
-//                .buildAndExpand(newuser.getUserid())
-//                .toUri();
-//        responseHeaders.setLocation(newUserURI);
-//
-//        return new ResponseEntity<>(null,
-//                responseHeaders,
-//                HttpStatus.CREATED);
-//    }
+    @GetMapping(value = "/users/{userid}/comments",
+            produces = "application/json")
+    public ResponseEntity<?> getUsersComments(
+            @PathVariable
+                    long userid)
+    {
+        List<Comment> comments = commentService.findAllUserComments(userid);
 
-//    Given an userid, return a user
+        return new ResponseEntity<>(comments, HttpStatus.OK);
+    }
+
     @GetMapping(value = "/users/{userId}",
         produces = "application/json")
     public ResponseEntity<?> getUserById(
@@ -70,7 +60,6 @@ public class UserController
                 HttpStatus.OK);
     }
 
-//    Given a username, return a user
     @GetMapping(value = "/users/name/{userName}",
         produces = "application/json")
     public ResponseEntity<?> getUserByName(
@@ -82,8 +71,7 @@ public class UserController
                 HttpStatus.OK);
     }
 
-//    Given a string, return a list of users whose username contains said string
-    @GetMapping(value = "/users/name/like/{userName}",
+    @GetMapping(value = "/users/like-name/{userName}",
         produces = "application/json")
     public ResponseEntity<?> getUserLikeName(
             @PathVariable
@@ -94,15 +82,6 @@ public class UserController
                 HttpStatus.OK);
     }
 
-//    @GetMapping(value = "/users/{userid}/posts", produces = "application/json")
-//    public ResponseEntity<?> getUsersPosts(@PathVariable long userid)
-//    {
-//        List<Post> posts = userService.getPosts(userid);
-//
-//        return new ResponseEntity<>(posts, HttpStatus.OK);
-//    }
-
-//    Given a userid and a json body, edit a specific user
     @PutMapping(value = "/users/{userid}",
         consumes = "application/json")
     public ResponseEntity<?> updateFullUser(
@@ -118,7 +97,6 @@ public class UserController
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-//    Given a userid, delete a specific user
     @DeleteMapping(value = "/users/{id}")
     public ResponseEntity<?> deleteUserById(
             @PathVariable
@@ -127,7 +105,4 @@ public class UserController
         userService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-//    Given a userid, return all posts made by that user
-
 }
