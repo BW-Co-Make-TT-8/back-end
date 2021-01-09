@@ -16,10 +16,4 @@ public interface PostService
     Post findPostById(long id);
 
     void delete(Long id);
-
-    void deleteComment(long postid, long commentid);
-
-//    void deleteComment(long postid, long commentid);
-
-//    Post addNewComment(Comment , long );
 }
