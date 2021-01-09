@@ -11,6 +11,9 @@ import org.springframework.core.env.Environment;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
+@EnableWebMvc
+@SpringBootTest
+
 public class ServerApplicationTests
 {
     private static final Logger logger = LoggerFactory.getLogger(com.comake.server.ServerApplicationTests.class);

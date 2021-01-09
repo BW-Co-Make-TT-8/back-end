@@ -55,25 +55,6 @@ public class PostServiceImpl implements PostService
         newPost.setCity(post.getCity());
         newPost.setState(post.getState());
         newPost.setLocation(post.getLocation());
-//        for (Location l : locationRepository.findAll())
-//        {
-//            Location location = new Location();
-//            if (post.getLocation().getZipcode() == l.getZipcode())
-//            {
-//                newPost.setLocation(post.getLocation());
-//            }
-////            else if (post.getLocation().getZipcode() != l.getZipcode())
-////            {
-////
-////            }
-//              else
-//            {
-//                location.setZipcode(l.getZipcode());
-//                locationRepository.save(location);
-//            }
-//        }
-
-//        newPost.setUser(post.getUser());
 
         for (Comment c : post.getComments())
         {
@@ -124,24 +105,4 @@ public class PostServiceImpl implements PostService
     {
         postRepository.deleteById(id);
     }
-
-    @Override
-    public void deleteComment(long postid, long commentid)
-    {
-
-    }
-
-//    @Override
-//    public Post addNewComment(Comment newComment, long id)
-//    {
-//        Comment comment = new Comment();
-//        comment.setCommentbody(newComment.getCommentbody());
-//        commentRepository.save(comment);
-//
-//        Post post;
-//        post = postRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Post with id " + id + " not found."));
-//        post.getComments().add(comment);
-//        System.out.println("NEW COMMENT ====> " + newComment);
-//        return postRepository.save(post);
-//    }
 }
