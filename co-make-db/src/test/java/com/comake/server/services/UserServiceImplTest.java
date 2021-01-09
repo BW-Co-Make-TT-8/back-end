@@ -1,54 +1,96 @@
 package com.comake.server.services;
 
-import org.junit.jupiter.api.Test;
+import com.comake.server.ServerApplication;
+import com.comake.server.ServerApplicationTests;
+import com.comake.server.models.User;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertNotNull;
 
-class UserServiceImplTest
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = ServerApplication.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+
+public class UserServiceImplTest
 {
+    @Autowired
+    private UserService userService;
 
-    @Test
-    void findUserById()
+    @Autowired
+    private PostService postService;
+
+    @Autowired
+    private CommentService commentService;
+
+    @Before
+    public void setUp() throws
+            Exception
+    {
+        MockitoAnnotations.initMocks(this);
+    }
+
+    @After
+    public void tearDown() throws
+            Exception
     {
     }
 
     @Test
-    void findByNameContaining()
+    public void a_findUserById()
     {
+        assertEquals("davidc", userService.findUserById(4).getUsername());
     }
 
     @Test
-    void findAll()
+    public void b_findByNameContaining()
     {
+        assertEquals(1, userService.findByNameContaining("dav").size());
     }
 
     @Test
-    void delete()
+    public void c_findAll()
     {
+        assertEquals(3, userService.findAll().size());
     }
 
     @Test
-    void findByName()
+    public void d_findByName()
     {
+        assertEquals("davidc", userService.findByName("davidc").getUsername());
     }
 
     @Test
-    void save()
+    public void e_save()
     {
+        User u4 = new User();
+        u4.setUsername("test123");
+        u4.setPasswordNoEncrypt("password");
+        u4.setEmail("test123@gmail.com");
+        User addUser = userService.save(u4);
+        assertEquals("test123", addUser.getUsername());
     }
 
     @Test
-    void update()
+    public void f_delete()
     {
+        userService.delete(4);
+        assertEquals(3, userService.findAll().size());
     }
 
     @Test
-    void deleteAll()
+    public void g_deleteAll()
     {
-    }
-
-    @Test
-    void findByUsername()
-    {
+        userService.deleteAll();
+        assertEquals(0, userService.findAll().size());
     }
 }

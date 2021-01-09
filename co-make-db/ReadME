@@ -1,0 +1,8 @@
+To-do List:
+
+Features that need to be added:
+- Change all delete methods to clear the message body to "Deleted" and hide the username associated with the post and/or comment.
+    - Comments that are attached to the deleted post and/or comment should not be deleted (cascade = off).
+    - As a result, the post/comment that is "deleted" is not actually deleted but its attributes/fields are just wiped.
+
+
