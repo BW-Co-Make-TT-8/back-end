@@ -55,6 +55,7 @@ public class PostServiceImpl implements PostService
         newPost.setCity(post.getCity());
         newPost.setState(post.getState());
         newPost.setLocation(post.getLocation());
+        newPost.setLikes(post.getLikes());
 
         for (Comment c : post.getComments())
         {

@@ -43,13 +43,15 @@ public class Post extends Auditable
     @Column(nullable = false)
     private long location;
 
+    private long likes;
+
 //    @Id
 ////    @ManyToOne
 ////    @JoinColumn(name = "userid", nullable = false)
 ////    @JsonIgnoreProperties(value = {"posts", "comments", "roles"}, allowSetters = true)
 ////    private User user;
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties(value = {"post", "user"}, allowSetters = true)
+    @JsonIgnoreProperties(value = {"post"}, allowSetters = true)
     private Set<UserPost> userPosts = new HashSet<>();
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -173,7 +175,17 @@ public class Post extends Auditable
         this.location = location;
     }
 
-//    public User getUser()
+    public long getLikes()
+    {
+        return likes;
+    }
+
+    public void setLikes(long likes)
+    {
+        this.likes = likes;
+    }
+
+    //    public User getUser()
 //    {
 //        return user;
 //    }
