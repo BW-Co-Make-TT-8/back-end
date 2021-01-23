@@ -107,6 +107,8 @@ public class UserServiceImpl implements UserService
                             addRole));
         }
 
+        newUser.setLocation(user.getLocation());
+
         return userrepos.save(newUser);
     }
 
