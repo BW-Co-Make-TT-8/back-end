@@ -51,7 +51,7 @@ public class Post extends Auditable
 ////    @JsonIgnoreProperties(value = {"posts", "comments", "roles"}, allowSetters = true)
 ////    private User user;
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties(value = {"post", "user"}, allowSetters = true)
+    @JsonIgnoreProperties(value = {"post"}, allowSetters = true)
     private Set<UserPost> userPosts = new HashSet<>();
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -174,7 +174,7 @@ public class Post extends Auditable
     {
         this.location = location;
     }
-
+    
     public long getUpvote()
     {
         return upvote;
@@ -183,6 +183,7 @@ public class Post extends Auditable
     public void setUpvote(long upvote)
     {
         this.upvote = upvote;
+
     }
 
     //    public User getUser()
