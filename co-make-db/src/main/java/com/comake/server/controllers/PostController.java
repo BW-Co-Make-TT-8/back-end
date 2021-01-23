@@ -49,6 +49,14 @@ public class PostController
         return new ResponseEntity<>(post, HttpStatus.OK);
     }
 
+    @PostMapping(value = "/posts/{id}/upvotes", produces = "application/json")
+    public ResponseEntity<?> getPostsUpvoteCount(@PathVariable long id)
+    {
+
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
 //    @PostMapping(value = "/posts/post/{id}/comments", consumes = "application/json")
 //    public ResponseEntity<?> addNewComment(@RequestBody Comment newComment, @PathVariable long id)
 //    {

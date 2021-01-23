@@ -55,6 +55,7 @@ public class PostServiceImpl implements PostService
         newPost.setCity(post.getCity());
         newPost.setState(post.getState());
         newPost.setLocation(post.getLocation());
+        newPost.setUpvote(post.getUpvote());
 
         for (Comment c : post.getComments())
         {
@@ -69,6 +70,7 @@ public class PostServiceImpl implements PostService
 
     @Override
     public List<Post> findAll()
+            
     {
         List<Post> posts = new ArrayList<>();
         postRepository.findAll().iterator().forEachRemaining(posts::add);

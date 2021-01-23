@@ -43,6 +43,8 @@ public class Post extends Auditable
     @Column(nullable = false)
     private long location;
 
+    private long upvote;
+
 //    @Id
 ////    @ManyToOne
 ////    @JoinColumn(name = "userid", nullable = false)
@@ -173,7 +175,17 @@ public class Post extends Auditable
         this.location = location;
     }
 
-//    public User getUser()
+    public long getUpvote()
+    {
+        return upvote;
+    }
+
+    public void setUpvote(long upvote)
+    {
+        this.upvote = upvote;
+    }
+
+    //    public User getUser()
 //    {
 //        return user;
 //    }
